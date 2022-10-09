@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Devices</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        //showing form based on the drop down input
+        $(document).ready(function () {
+            $("form").hide();
+
+        })
+        $(function () {
+            $("#type").on('change', function () {
+                $("form").hide();
+                if ($(this).val() == "TV")
+                    $("#Television").show();
+                else if ($(this).val() == "speakers")
+                    $("#Speakers").show();
+                else if ($(this).val() == "Cooling device")
+                    $("#AC").show();
+                else if ($(this).val() == "Heating device")
+                    $("#heating").show();
+                else if ($(this).val() == "Blinds")
+                    $("#blinds").show();
+                else if ($(this).val() == "Doors")
+                    $("#doors").show();
+                else if ($(this).val() == "Lights")
+                    $("#lights").show();
+                else if ($(this).val() == "Security Cameras")
+                    $("#cameras").show();
+                else if ($(this).val() == "Fridge")
+                    $("#fridge").show();
+                else if ($(this).val() == "Water Sprinkler")
+                    $("#sprinkler").show();
+
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <!-- Navigation --------------------------------------------------------------------------------->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="https://img.icons8.com/carbon-copy/100/000000/circuit.png"
+                    width="30" height="30" class="d-inline-block align-text-top" style="filter: invert(100%);" />Smart
+                Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/adddevice">Add Device</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/devicestatus">Device Status</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    <br>
+
+    <!-- Select Device Option  Which Also controls the type of form is shown------------------------------------------------------>
+    <div class="container">
+        <div class="heading">
+            <h1 class="display-3 text-center">Here you can add more devices</h1>
+        </div>
+        <br>
+        <div class="update_container">
+            <div class="option_select">
+                <label class="form-label" for="type">Select a Device</label>
+                <select class="form-select" name="type" id="type" onchange="this.form.submit()">
+                    <option value="">--Select Device--</option>
+                    <option value="TV">TV</option>
+                    <option value="speakers">Wireless Speakers</option>
+                    <option value="Cooling device">Air Conditioner</option>
+                    <option value="Heating device">Heater</option>
+                    <option value="Blinds">Blinds</option>
+                    <option value="Doors">Doors</option>
+                    <option value="Lights"> Lights</option>
+                    <option value="Security Cameras">Security Cameras</option>
+                    <option value="Fridge">Fridge</option>
+                    <option value="Water Sprinkler">Water Sprinkler</option>
+                </select>
+            </div>
+            <br>
+
+            <!-- Television Form-------------------------------------------------------------------------------------------------- -->
+
+            <div class="device_form">
+                <form class="row g-3" method="POST" action="/addeddevice" id="Television">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="device_type">Device Type</label>
+                            <input class="form-control" type="text" id="device_type" name="device_type"
+                                value="Television" readonly>
+                        </div>
+
+                        <div class="col">
+                            <label class="form-label" for="name">Name of device</label>
+                            <input class="form-control" id="name" type="text" name="name" placeholder="Name of device"
+                                required>
+                        </div>
+                        <div class="status_drop col">
+                            <label class="form-label" for="status">Device status</label>
+                            <select class="form-select" name="status" id="status">
+                                <option selected value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting col w-100">
+                        <label class="form-label" for="setting">Volume of TV</label>
+                        <div class="range">
+                            <input class="form-range" type="range" min="0" max="100" value="50" class="slider"
+                                id="setting" name="setting">
+                            <span class=" border-0 mt-1 float-start">0</span>
+                            <span class="border-0  mt-1 float-end">100</span>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="extra_set col w-100">
+                        <label class="form-label" for="extra_setting">Set a channel number</label>
+                        <div class="range">
+
+                            <input class="form-range" type="range" min="0" step="1" max="100" value="50" class="slider"
+                                id="extra_setting" name="extra_setting">
+                            <span class=" border-0 mt-1 float-start">0</span>
+                            <span class="border-0  mt-1 float-end">100</span>
+                        </div>
+
+
+                    </div>
+
+                    <div class="submit text-center">
+                        <button class="btn btn-outline-dark" type=" submit">Submit</button>
+
+                    </div>
+
+                </form>
+            </div>
+
+
+            <!-- Speaker Form ------------------------------------------------------------------- -->
+
+
+            <div class="device_form">
+                <form class="row g-3" method="POST" action="/addeddevice" id="Speakers">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="device_type">Device Type</label>
+                            <input class="form-control" type="text" id="device_type" name="device_type" value="Speakers"
+                                readonly>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="name">Name of device</label>
+                            <input class="form-control" id="name" type="text" name="name" placeholder="Name of device"
+                                required />
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="status">Device status</label>
+                            <select class="form-select" name="status" id="status">
+                                <option selected value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="setting col w-100">
+                        <div>
+                            <label class="form-label" for="setting">Volume of Speakers</label>
+                            <input class="form-range" type="range" step="1" min="0" max="100" value="50" class="slider"
+                                id="setting" name="setting">
+                            <span class=" border-0 mt-1 float-start">0</span>
+                            <span class="border-0  mt-1 float-end">100</span>
+                        </div>
+
+                    </div>
+                    <div class="extra_set col">
+                        <label class="form-label" for="extra_setting">Select a playlist to play</label>
+                        <select class="form-select" name="extra_setting" id="extra_setting">
+                            <option selected value="All">All</option>
+                            <option value="Jazz Oldie">Jazz Oldie</option>
+                            <option value="Pop Music">Pop Music</option>
+                            <option value="Classics">Classics</option>
+                            <option value="Rock Music">Rock Hard</option>
+                        </select>
+                    </div>
+                    <div class="submit text-center">
+                        <button class="btn btn-outline-dark" type=" submit">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+
+
+            <!-- A/C Form -------------------------------------------------------------------------------------------------------------------->
+            <div class="device_form">
+                <form class="row g-3" method="POST" action="/addeddevice" id="AC">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="device_type">Device Type</label>
+                            <input class="form-control" type="text" id="device_type" name="device_type" value="A/C"
+                                readonly>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="name">Name of device</label>
+                            <input class="form-control" id="name" type="text" name="name" placeholder="name of device"
+                                required />
+                        </div>
+
+                        <div class="col">
+                            <label class="form-label" for="status">Device status</label>
+                            <select class="form-select" name="status" id="status">
+                                <option selected value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting col w-100">
+                        <div>
+                            <label class="form-label" for="setting">Temperature</label>
+                            <input class="form-range" step="0.5" type="range" min="16" max="25" value="20"
+                                class="slider" id="setting" name="setting">
+                            <span class=" border-0 mt-1 float-start">16</span>
+                            <span class="border-0  mt-1 float-end">25</span>
+                        </div>
+
+                    </div>
+
+                    <div class="extra_set col">
+                        <label class="form-label" for="extra_setting">Select Room</label>
+                        <select class="form-select" name="extra_setting" id="extra_setting">
+                            <option selected value="All">All</option>
+                            <option value="Master Bedroom">Master Bedroom</option>
+                            <option value="Kids Bedroom">Kids Bedroom</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Library">Library</option>
+                            <option value="Lounge">Lounge</option>
+                        </select>
+                    </div>
+                    <div class="submit text-center">
+                        <button class="btn btn-outline-dark" type=" submit">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Heater Form  --------------------------------------------------------------------------------------------->
+
+            <div class="device_form">
+                <form class="row g-3" method="POST" action="/addeddevice" id="heating">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="device_type">Device Type</label>
+                            <input class="form-control" type="text" id="device_type" name="device_type" value="Heating"
+                                readonly>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="name">Name of device</label>
+                            <input class="form-control" id="name" type="text" name="name" placeholder="Name of device"
+                                required />
+                        </div>
+
+                        <div class="col">
+                            <label class="form-label" for="status">Device status</label>
+                            <select class="form-select" name="status" id="status">
+                                <option selected value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting col w-100">
+                        <div>
+                            <label class="form-label" for="setting">Temperature</label>
+                            <input class="form-range" step="0.5" type="range" min="26" max="36" step="1" value="26"
+                                class="slider" id="setting" name="setting">
+                            <span class=" border-0 mt-1 float-start">26</span>
+                            <span class="border-0  mt-1 float-end">36</span>
+                        </div>
+
+
+                    </div>
+
+                    <div class="extra_set col">
+                        <label class="form-label" for="extra_setting">Select Room</label>
+                        <select class="form-select" name="extra_setting" id="extra_setting">
+                            <option selected value="All">All</option>
+                            <option value="Master Bedroom">Master Bedroom</option>
+                            <option value="Kids Bedroom">Kids Bedroom</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Library">Library</option>
+                            <option value="Lounge">Lounge</option>
+                        </select>
+                    </div>
+                    <div class="submit text-center">
+                        <button class="btn btn-outline-dark" type=" submit">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Blinds form------------------------------------------------------------------------------------------->
+
+            <div class="device_form">
+                <form class="row g-3" method="POST" action="/addeddevice" id="blinds">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="device_type">Device Type</label>
+                            <input class="form-control" type="text" id="device_type" name="device_type" value="Blinds"
+                                readonly>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="name">Name of device</label>
+                            <input class="form-control" id="name" type="text" name="name" placeholder="Name of device"
+                                required />
+                        </div>
+
+                        <div class="col">
+                            <label class="form-label" for="status">Device status</label>
+                            <select class="form-select" name="status" id="status">
+                                <option selected value="Open">Open</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting col w-100">
+                        <div>
+                            <label class="form-label" for="setting">Opening level</label>
+                            <input class="form-range" type="range" min="0" max="100" step="25" value="10" class="slider"
+                                id="setting" name="setting">
+                            <span class=" border-0 mt-1 float-start">0%</span>
+                            <span class="border-0  mt-1 float-end">100%</span>
+                        </div>
+                    </div>
+
+                    <div class="extra_set col">
+                        <label class="form-label" for="extra_setting">Select Room</label>
+                        <select class="form-select" name="extra_setting" id="extra_setting">
+                            <option selected value="All">All</option>
+                            <option value="Master Bedroom">Master Bedroom</option>
+                            <option value="Kids Bedroom">Kids Bedroom</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Library">Library</option>
+                            <option value="Lounge">Lounge</option>
+                        </select>
+                    </div>
+
+                    <div class="submit text-center">
+                        <button class="btn btn-outline-dark" type=" submit">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Doors Form--------------------------------------------------------------------------------------------------------->
+
+            <div class="device_form">
+                <form class="row g-3" method="POST" action="/addeddevice" id="doors">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="device_type">Device Type</label>
+                            <input class="form-control" type="text" id="device_type" name="device_type" value="Doors"
+                                readonly>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="name">Name of device</label>
+                            <input class="form-control" id="name" type="text" name="name" placeholder="Name of device"
+                                required />
+                        </div>
+
+                        <div class="col">
+                            <label class="form-label" for="status">Device status</label>
+                            <select class=" form-select" name="status" id="status">
+                                <option selected value="Locked">Locked</option>
+                                <option value="Unlocked">Unlocked</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting col">
+                        <label class="form-label" for="setting">Select Room</label>
+                        <select class="form-select" name="setting" id="setting">
+                            <option selected value="All">All</option>
+                            <option value="Master Bedroom">Master Bedroom</option>
+                            <option value="Kids Bedroom">Kids Bedroom</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Library">Library</option>
+                            <option value="Lounge">Lounge</option>
+                        </select>
+
+                    </div>
+
+                    <div class="submit text-center">
+                        <button class="btn btn-outline-dark" type=" submit">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Lights Form------------------------------------------------------------------------------------------------->
+
+            <div class="device_form">
+                <form class="row g-3" method="POST" action="/addeddevice" id="lights">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="device_type">Device Type</label>
+                            <input class="form-control" type="text" id="device_type" name="device_type" value="Lights"
+                                readonly>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="name">Name of device</label>
+                            <input class="form-control" id="name" type="text" name="name" placeholder="Name of device"
+                                required />
+                        </div>
+
+                        <div class="col">
+                            <label class="form-label" for="status">Device status</label>
+                            <select class="form-select" name="status" id="status">
+                                <option selected value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting col">
+                        <label class="form-label" for="setting">Intensity</label>
+                        <input class="form-range" type="range" min="0" max="10" step="1" value="1" class="slider"
+                            id="setting" name="setting">
+                        <span class=" border-0 mt-1 float-start">0</span>
+                        <span class="border-0  mt-1 float-end">10</span>
+
+                    </div>
+
+                    <div class="extra_set col">
+                        <label class="form-label" for="extra_setting">Select Room</label>
+                        <select class="form-select" name="extra_setting" id="extra_setting">
+                            <option selected value="All">All</option>
+                            <option value="Master Bedroom">Master Bedroom</option>
+                            <option value="Kids Bedroom">Kids Bedroom</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Library">Library</option>
+                            <option value="Lounge">Lounge</option>
+                        </select>
+                    </div>
+
+                    <div class="submit text-center">
+                        <button class="btn btn-outline-dark" type=" submit">Submit</button>
+                    </div>
+
+
+
+                </form>
+            </div>
+
+            <!-- Security Camera Form -------------------------------------------------------------------------------------------->
+
+            <div class="device_form">
+                <form class="row g-3" method="POST" action="/addeddevice" id="cameras">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="device_type">Device Type</label>
+                            <input class="form-control" type="text" id="device_type" name="device_type"
+                                value="Security Cameras" readonly>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="name">Name of device</label>
+                            <input class="form-control" id="name" type="text" name="name" placeholder="Name of device"
+                                required />
+                        </div>
+
+                        <div class="col">
+                            <label class="form-label" for="status">Device status</label>
+                            <select class="form-select" name="status" id="status">
+                                <option selected value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting col">
+                        <label class="form-label" for="setting">Select Room</label>
+                        <select class="form-select" name="setting" id="setting">
+                            <option selected value="All">All</option>
+                            <option value="Master Bedroom">Master Bedroom</option>
+                            <option value="Kids Bedroom">Kids Bedroom</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Library">Library</option>
+                            <option value="Lounge">Lounge</option>
+                        </select>
+                    </div>
+
+                    <div class="submit text-center">
+                        <button class="btn btn-outline-dark" type=" submit">Submit</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- Fridge Form --------------------------------------------------------------------------------------------------------->
+
+            <div class="device_form">
+                <form class="row g-3" method="POST" action="/addeddevice" id="fridge">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="device_type">Device Type</label>
+                            <input class="form-control" type="text" id="device_type" name="device_type" value="Fridge"
+                                readonly>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="name">Name of device</label>
+                            <input class="form-control" id="name" type="text" name="name" placeholder="Name of device"
+                                required />
+                        </div>
+
+                        <div class="col">
+                            <label class="form-label" for="status">Device status</label>
+                            <select class="form-select" name="status" id="status">
+                                <option selected value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="setting col">
+                        <div>
+                            <label class="form-label" for="setting">Temperature</label>
+                            <input class="form-range" type="range" min="0" max="10" step="1" value="1" class="slider"
+                                id="setting" name="setting">
+                            <span class=" border-0 mt-1 float-start">0</span>
+                            <span class="border-0  mt-1 float-end">10</span>
+                        </div>
+
+                    </div>
+
+                    <div class="extra_set col">
+                        <label class="form-label" for="extra_setting">Select Room</label>
+                        <select class="form-select" name="extra_setting" id="extra_setting">
+                            <option selected value="All">All</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Storage">Storage</option>
+                        </select>
+                    </div>
+
+
+                    <div class="submit text-center">
+                        <button class="btn btn-outline-dark" type=" submit">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+            <!-- Sprinkler Form ------------------------------------------------------------------------------------------------------->
+            <div class="device_form">
+                <form class="row g-3" method="POST" action="/addeddevice" id="sprinkler">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="device_type">Device Type</label>
+                            <input class="form-control" type="text" id="device_type" name="device_type"
+                                value="Water Sprinkler" readonly>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="name">Name of device</label>
+                            <input class="form-control" id="name" type="text" name="name" placeholder="Name of device"
+                                required />
+                        </div>
+
+                        <div class="col">
+                            <label class="form-label" for="status">Device status</label>
+                            <select class="form-select" name="status" id="status">
+                                <option selected value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="setting col">
+                        <div>
+                            <label class="form-label" for="setting">Intensity</label>
+                            <input class="form-range" type="range" min="0" max="10" step="1" value="1" class="slider"
+                                id="setting" name="setting">
+                            <span class=" border-0 mt-1 float-start">0</span>
+                            <span class="border-0  mt-1 float-end">10</span>
+                        </div>
+
+                    </div>
+
+                    <div class="extra_set col">
+                        <label class="form-label" for="extra_setting">Select Garden</label>
+                        <select class="form-select" name="extra_setting" id="extra_setting">
+                            <option selected value="All">All</option>
+                            <option value="Frontyard">Frontyard</option>
+                            <option value="Backyard">Backyard</option>
+                        </select>
+                    </div>
+                    <div class="submit text-center">
+                        <button class="btn btn-outline-dark" type=" submit">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+            <!-- Takes us to the device status page -->
+            <div class="view_all">
+                <a href="/devicestatus">View all the devices</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>
